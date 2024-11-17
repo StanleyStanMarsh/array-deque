@@ -11,31 +11,31 @@ public class ArrayDequeTest {
     @Test
     public void addRemoveFirstTest()
     {
-        Deque<Integer> deque = new ArrayDeque<Integer>();
+        Deque<Integer> javaDeque = new ArrayDeque<Integer>();
         Deque<Integer> myDeque = new MyArrayDeque<Integer>();
-        deque.addFirst(1);
+        javaDeque.addFirst(1);
         myDeque.addFirst(1);
         // Проверяем, что оба дека возвращают одинаковый первый элемент
-        Assert.assertEquals(deque.removeFirst(), myDeque.removeFirst());
+        Assert.assertEquals(javaDeque.removeFirst(), myDeque.removeFirst());
 
         // Добавляем несколько элементов и проверяем
-        deque.addFirst(2);
+        javaDeque.addFirst(2);
         myDeque.addFirst(2);
 
-        deque.addFirst(3);
+        javaDeque.addFirst(3);
         myDeque.addFirst(3);
 
         // Проверяем порядок элементов
-        Assert.assertEquals(deque.removeFirst(), myDeque.removeFirst());
-        Assert.assertEquals(deque.removeFirst(), myDeque.removeFirst());
+        Assert.assertEquals(javaDeque.removeFirst(), myDeque.removeFirst());
+        Assert.assertEquals(javaDeque.removeFirst(), myDeque.removeFirst());
 
         // Проверяем, что размеры обеих дек одинаковые после операций
-        Assert.assertEquals(deque.size(), myDeque.size());
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
     }
 
     @Test
     public void addLastRemoveFirstTest() {
-        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
         try {
@@ -46,30 +46,30 @@ public class ArrayDequeTest {
         }
 
         // Добавляем элемент в конец
-        deque.addLast(1);
+        javaDeque.addLast(1);
         myDeque.addLast(1);
 
         // Проверяем, что оба дека возвращают одинаковый первый элемент
-        Assert.assertEquals(deque.removeFirst(), myDeque.removeFirst());
+        Assert.assertEquals(javaDeque.removeFirst(), myDeque.removeFirst());
 
         // Добавляем несколько элементов и проверяем
-        deque.addLast(2);
+        javaDeque.addLast(2);
         myDeque.addLast(2);
 
-        deque.addLast(3);
+        javaDeque.addLast(3);
         myDeque.addLast(3);
 
         // Проверяем порядок элементов
-        Assert.assertEquals(deque.removeFirst(), myDeque.removeFirst());
-        Assert.assertEquals(deque.removeFirst(), myDeque.removeFirst());
+        Assert.assertEquals(javaDeque.removeFirst(), myDeque.removeFirst());
+        Assert.assertEquals(javaDeque.removeFirst(), myDeque.removeFirst());
 
         // Проверяем, что размеры обеих дек одинаковые после операций
-        Assert.assertEquals(deque.size(), myDeque.size());
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
     }
 
     @Test
     public void addFirstRemoveLastTest() {
-        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
         try {
@@ -80,96 +80,97 @@ public class ArrayDequeTest {
         }
 
         // Добавим несколько элементов в начало
-        deque.addFirst(1);
-        deque.addFirst(2);
-        deque.addFirst(3);
+        javaDeque.addFirst(1);
+        javaDeque.addFirst(2);
+        javaDeque.addFirst(3);
 
         myDeque.addFirst(1);
         myDeque.addFirst(2);
         myDeque.addFirst(3);
 
         // Удалим и проверим, что последний элемент одинаков для обоих дек
-        Assert.assertEquals(deque.removeLast(), myDeque.removeLast());
+        Assert.assertEquals(javaDeque.removeLast(), myDeque.removeLast());
 
         // Проверим, что следующий последний элемент тоже удаляется правильно
-        Assert.assertEquals(deque.removeLast(), myDeque.removeLast());
+        Assert.assertEquals(javaDeque.removeLast(), myDeque.removeLast());
 
         // Проверим, что размеры обоих дек уменьшились
-        Assert.assertEquals(deque.size(), myDeque.size());
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
 
         // Убедимся, что оставшийся элемент одинаков в обоих деках
-        Assert.assertEquals(deque.removeLast(), myDeque.removeLast());
+        Assert.assertEquals(javaDeque.removeLast(), myDeque.removeLast());
 
         // Убедимся, что оба деки теперь пусты
-        Assert.assertTrue(deque.isEmpty());
+        Assert.assertTrue(javaDeque.isEmpty());
         Assert.assertTrue(myDeque.isEmpty());
     }
 
     @Test
     public void addRemoveLastTest() {
-        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
         // Добавим несколько элементов в конец
-        deque.addLast(1);
-        deque.addLast(2);
-        deque.addLast(3);
+        javaDeque.addLast(1);
+        javaDeque.addLast(2);
+        javaDeque.addLast(3);
 
         myDeque.addLast(1);
         myDeque.addLast(2);
         myDeque.addLast(3);
 
         // Удалим и проверим, что последний элемент одинаков для обоих дек
-        Assert.assertEquals(deque.removeLast(), myDeque.removeLast());
+        Assert.assertEquals(javaDeque.removeLast(), myDeque.removeLast());
 
         // Проверим, что следующий последний элемент тоже удаляется правильно
-        Assert.assertEquals(deque.removeLast(), myDeque.removeLast());
+        Assert.assertEquals(javaDeque.removeLast(), myDeque.removeLast());
 
         // Проверим, что размеры обоих дек уменьшились
-        Assert.assertEquals(deque.size(), myDeque.size());
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
 
         // Убедимся, что оставшийся элемент одинаков в обоих деках
-        Assert.assertEquals(deque.removeLast(), myDeque.removeLast());
+        Assert.assertEquals(javaDeque.removeLast(), myDeque.removeLast());
 
         // Убедимся, что оба деки теперь пусты
-        Assert.assertTrue(deque.isEmpty());
+        Assert.assertTrue(javaDeque.isEmpty());
         Assert.assertTrue(myDeque.isEmpty());
     }
 
     @Test
     public void offerFirstTest() {
-        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
         // Используем offerFirst для добавления элемента в начало
         Assert.assertTrue(myDeque.offerFirst(1));
-        deque.addFirst(1);
+        javaDeque.addFirst(1);
 
         // Проверяем, что первый элемент одинаков для обоих дек
-        Assert.assertEquals(deque.peekFirst(), myDeque.peekFirst());
+        Assert.assertEquals(javaDeque.peekFirst(), myDeque.peekFirst());
 
         // Проверяем размер дека
-        Assert.assertEquals(deque.size(), myDeque.size());
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
     }
 
     @Test
     public void offerLastTest() {
-        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
         // Используем offerLast для добавления элемента в конец
         Assert.assertTrue(myDeque.offerLast(1));
-        deque.addLast(1);
+        javaDeque.addLast(1);
 
         // Проверяем, что последний элемент одинаков для обоих дек
-        Assert.assertEquals(deque.peekLast(), myDeque.peekLast());
+        Assert.assertEquals(javaDeque.peekLast(), myDeque.peekLast());
 
         // Проверяем размер дека
-        Assert.assertEquals(deque.size(), myDeque.size());
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
     }
 
     @Test
     public void getFirstTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
         // Проверяем поведение при пустом деке, должно вызываться исключение
@@ -181,16 +182,19 @@ public class ArrayDequeTest {
         }
 
         // Добавляем элемент и проверяем, что getFirst возвращает его
+        javaDeque.addFirst(1);
         myDeque.addFirst(1);
-        Assert.assertEquals(Integer.valueOf(1), myDeque.getFirst());
+        Assert.assertEquals(javaDeque.getFirst(), myDeque.getFirst());
 
         // Добавляем еще один элемент в начало и проверяем
+        javaDeque.addFirst(2);
         myDeque.addFirst(2);
-        Assert.assertEquals(Integer.valueOf(2), myDeque.getFirst());
+        Assert.assertEquals(javaDeque.getFirst(), myDeque.getFirst());
     }
 
     @Test
     public void getLastTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
         // Проверка поведения на пустом деке - должно вызываться исключение
@@ -202,12 +206,14 @@ public class ArrayDequeTest {
         }
 
         // Добавляем элемент и проверяем, что getLast возвращает его
+        javaDeque.addLast(1);
         myDeque.addLast(1);
-        Assert.assertEquals(Integer.valueOf(1), myDeque.getLast());
+        Assert.assertEquals(javaDeque.getLast(), myDeque.getLast());
 
         // Добавляем еще один элемент в конец и проверяем
+        javaDeque.addLast(2);
         myDeque.addLast(2);
-        Assert.assertEquals(Integer.valueOf(2), myDeque.getLast());
+        Assert.assertEquals(javaDeque.getLast(), myDeque.getLast());
     }
 
     @Test
@@ -258,5 +264,240 @@ public class ArrayDequeTest {
         Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
 
         Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void addTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Integer[] elements = {1, 2, 3, 4, 5, 3};
+        for (Integer element : elements) {
+            javaDeque.add(element);
+            myDeque.add(element);
+        }
+
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
+
+        Integer[] javaDequeArray = javaDeque.toArray(new Integer[0]);
+        Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
+
+        Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void offerTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Integer[] elements = {1, 2, 3, 4, 5, 3};
+        for (Integer element : elements) {
+            javaDeque.offer(element);
+            myDeque.offer(element);
+        }
+
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
+
+        Integer[] javaDequeArray = javaDeque.toArray(new Integer[0]);
+        Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
+
+        Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void removeTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Integer[] elements = {1, 2, 3, 4, 5, 3};
+        for (Integer element : elements) {
+            javaDeque.offer(element);
+            myDeque.offer(element);
+        }
+
+        javaDeque.remove();
+        javaDeque.remove();
+        myDeque.remove();
+        myDeque.remove();
+
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
+
+        Integer[] javaDequeArray = javaDeque.toArray(new Integer[0]);
+        Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
+
+        Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void pollTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Integer[] elements = {1, 2, 3, 4, 5, 3};
+        for (Integer element : elements) {
+            javaDeque.offer(element);
+            myDeque.offer(element);
+        }
+
+        javaDeque.poll();
+        javaDeque.poll();
+        myDeque.poll();
+        myDeque.poll();
+
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
+
+        Integer[] javaDequeArray = javaDeque.toArray(new Integer[0]);
+        Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
+
+        Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void elementTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Integer[] elements = {1, 2, 3, 4, 5, 3};
+        for (Integer element : elements) {
+            javaDeque.addFirst(element);
+            myDeque.addFirst(element);
+        }
+
+        Assert.assertEquals(javaDeque.element(), myDeque.element());
+    }
+
+    @Test
+    public void peekFirstTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        // Добавляем элементы
+        javaDeque.addLast(10);
+        myDeque.addLast(10);
+
+        javaDeque.addLast(20);
+        myDeque.addLast(20);
+
+        // Проверяем первый элемент
+        Assert.assertEquals(javaDeque.peekFirst(), myDeque.peekFirst());
+    }
+
+    @Test
+    public void peekLastTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        // Добавляем элементы
+        javaDeque.addLast(10);
+        myDeque.addLast(10);
+
+        javaDeque.addLast(20);
+        myDeque.addLast(20);
+
+        // Проверяем последний элемент
+        Assert.assertEquals(javaDeque.peekLast(), myDeque.peekLast());
+    }
+
+    @Test
+    public void peekTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        // Добавляем элементы
+        javaDeque.addLast(10);
+        myDeque.addLast(10);
+
+        javaDeque.addLast(20);
+        myDeque.addLast(20);
+
+        // Проверяем первый элемент с помощью метода peek
+        Assert.assertEquals(javaDeque.peek(), myDeque.peek());
+    }
+
+    @Test
+    public void pushTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        // Добавляем элементы
+        javaDeque.push(1);
+        myDeque.push(1);
+
+        javaDeque.push(2);
+        myDeque.push(2);
+
+        // Проверяем верхний элемент после push
+        Assert.assertEquals(javaDeque.peek(), myDeque.peek());
+
+        // Проверяем размеры дека
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
+    }
+
+    @Test
+    public void popTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        // Добавляем и извлекаем элементы
+        javaDeque.push(1);
+        myDeque.push(1);
+
+        javaDeque.push(2);
+        myDeque.push(2);
+
+        // Удаляем верхний элемент и проверяем
+        Assert.assertEquals(javaDeque.pop(), myDeque.pop());
+
+        // Проверяем оставшийся верхний элемент
+        Assert.assertEquals(javaDeque.peek(), myDeque.peek());
+
+        // Проверяем размеры дека
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
+    }
+
+    @Test
+    public void removeBoolTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        // Заполняем дек
+        javaDeque.addLast(1);
+        myDeque.addLast(1);
+
+        javaDeque.addLast(2);
+        myDeque.addLast(2);
+
+        javaDeque.addLast(3);
+        myDeque.addLast(3);
+
+        // Удаляем элемент
+        Assert.assertEquals(javaDeque.remove((Integer) 2), myDeque.remove((Integer) 2));
+
+        // Проверяем, что размер уменьшился
+        Assert.assertEquals(javaDeque.size(), myDeque.size());
+
+        // Проверяем, что элемента больше нет
+        Assert.assertArrayEquals(javaDeque.toArray(), myDeque.toArray());
+    }
+
+    @Test
+    public void clearTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        // Заполняем дек
+        javaDeque.add(1);
+        myDeque.addLast(1);
+
+        javaDeque.add(2);
+        myDeque.addLast(2);
+
+        javaDeque.add(3);
+        myDeque.addLast(3);
+
+        // Очищаем оба дека
+        javaDeque.clear();
+        myDeque.clear();
+
+        // Проверяем, что дек пуст
+        Assert.assertTrue(javaDeque.isEmpty());
+        Assert.assertTrue(myDeque.isEmpty());
+
+        // Проверяем, что размеры дек равны 0
+        Assert.assertEquals(0, javaDeque.size());
+        Assert.assertEquals(0, myDeque.size());
     }
 }

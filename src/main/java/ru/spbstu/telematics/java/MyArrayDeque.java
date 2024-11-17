@@ -227,12 +227,13 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public void clear() {
-
+        this.array = new Object[0];
+        this.size = 0;
     }
 
     @Override
     public void push(T t) {
-        this.addLast(t);
+        this.addFirst(t);
     }
 
     @Override
