@@ -120,4 +120,36 @@ public class ArrayDequeTest {
         Assert.assertTrue(deque.isEmpty());
         Assert.assertTrue(myDeque.isEmpty());
     }
+
+    @Test
+    public void offerFirstTest() {
+        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        // Используем offerFirst для добавления элемента в начало
+        Assert.assertTrue(myDeque.offerFirst(1));
+        deque.addFirst(1);
+
+        // Проверяем, что первый элемент одинаков для обоих дек
+        Assert.assertEquals(deque.peekFirst(), myDeque.peekFirst());
+
+        // Проверяем размер дека
+        Assert.assertEquals(deque.size(), myDeque.size());
+    }
+
+    @Test
+    public void offerLastTest() {
+        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        // Используем offerLast для добавления элемента в конец
+        Assert.assertTrue(myDeque.offerLast(1));
+        deque.addLast(1);
+
+        // Проверяем, что последний элемент одинаков для обоих дек
+        Assert.assertEquals(deque.peekLast(), myDeque.peekLast());
+
+        // Проверяем размер дека
+        Assert.assertEquals(deque.size(), myDeque.size());
+    }
 }
