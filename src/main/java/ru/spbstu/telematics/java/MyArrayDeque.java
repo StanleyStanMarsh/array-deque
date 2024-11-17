@@ -1,8 +1,5 @@
 package ru.spbstu.telematics.java;
-import java.util.Collection;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 class MyArrayDeque<T> implements Deque<T>
 {
@@ -97,10 +94,8 @@ class MyArrayDeque<T> implements Deque<T>
     public T pollFirst() {
         if (this.isEmpty())
             return null;
-        T firstElement = (T) this.array[0];
-        Object[] newArray = new Object[this.size - 1];
-        System.arraycopy(this.array, 1, newArray, 0, this.size - 1);
-        this.array = newArray;
+        T firstElement = this.getFirst();
+        this.del(0);
         this.size--;
         return firstElement;
     }
@@ -109,41 +104,78 @@ class MyArrayDeque<T> implements Deque<T>
     public T pollLast() {
         if (this.isEmpty())
             return null;
-        T lastElement = (T) this.array[this.size - 1];
-        Object[] newArray = new Object[this.size - 1];
-        System.arraycopy(this.array, 0, newArray, 0, this.size - 1);
-        this.array = newArray;
+        T lastElement = this.getLast();
+        this.del(this.size - 1);
         this.size--;
         return lastElement;
     }
 
     @Override
     public T getFirst() {
-        return null;
+        if (this.isEmpty())
+            throw new NoSuchElementException();
+        return this.peekFirst();
     }
 
     @Override
     public T getLast() {
-        return null;
+        if (this.isEmpty())
+            throw new NoSuchElementException();
+        return this.peekLast();
     }
 
     @Override
     public T peekFirst() {
-        return null;
+        if (this.isEmpty())
+            return null;
+        return (T) this.array[0];
     }
 
     @Override
     public T peekLast() {
-        return null;
+        if (this.isEmpty())
+            return null;
+        return (T) this.array[this.size - 1];
+    }
+
+    private void del(int index) {
+        if (index < 0 || index >= this.array.length) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
+        }
+        Object[] newArray = new Object[this.array.length - 1];
+        for (int i = 0, j = 0; i < this.array.length; i++) {
+            if (i != index) {
+                newArray[j++] = array[i];
+            }
+        }
+        this.array = newArray;
     }
 
     @Override
     public boolean removeFirstOccurrence(Object o) {
+        if (o == null)
+            return false;
+        for (int i = 0; i < this.size; i++) {
+            if (o.equals(this.array[i])) {
+                this.del(i);
+                this.size--;
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean removeLastOccurrence(Object o) {
+        if (o == null)
+            return false;
+        for (int i = this.size - 1; i >= 0; i--) {
+            if (o.equals(this.array[i])) {
+                this.del(i);
+                this.size--;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -239,12 +271,22 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return this.array;
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        if (a.length < this.size) {
+            return (T1[]) Arrays.copyOf(this.array, this.size, a.getClass());
+        }
+
+        System.arraycopy(this.array, 0, a, 0, this.size);
+
+        if (a.length > this.size) {
+            a[this.size] = null; // Если переданный массив больше по размеру, установить следующий элемент как null
+        }
+
+        return a;
     }
 
     @Override
