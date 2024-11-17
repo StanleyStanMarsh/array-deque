@@ -212,12 +212,25 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        int s = this.size;
+        for (T element : c) {
+            this.addLast(element);
+        }
+        return s != this.size;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        int s = this.size;
+        for (int i = 0; i < c.size(); i++) {
+            for (int j = 0; j < this.size; j++) {
+                if (c.contains(this.array[j])) {
+                    this.del(j);
+                    this.size--;
+                }
+            }
+        }
+        return s != this.size;
     }
 
     @Override

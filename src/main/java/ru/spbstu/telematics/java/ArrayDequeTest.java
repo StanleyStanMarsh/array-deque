@@ -3,9 +3,7 @@ package ru.spbstu.telematics.java;
 import org.junit.Test;
 import org.junit.Assert;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class ArrayDequeTest {
     @Test
@@ -499,5 +497,47 @@ public class ArrayDequeTest {
         // Проверяем, что размеры дек равны 0
         Assert.assertEquals(0, javaDeque.size());
         Assert.assertEquals(0, myDeque.size());
+    }
+
+    @Test
+    public void addAllTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Collection<Integer> collection = Arrays.asList(1, 2, 3);
+
+        // Пытаемся добавить все элементы из коллекции
+        boolean result1 = javaDeque.addAll(collection);
+        boolean result2 = myDeque.addAll(collection);
+
+        Assert.assertEquals(result1, result2);
+
+        Integer[] javaDequeArray = javaDeque.toArray(new Integer[0]);
+        Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
+
+        Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void testRemoveAll() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Collection<Integer> initialCollection = Arrays.asList(1, 2, 3, 4, 5);
+        myDeque.addAll(initialCollection);
+        javaDeque.addAll(initialCollection);
+
+        Collection<Integer> removeCollection = Arrays.asList(2, 4);
+
+        // Пытаемся удалить элементы
+        boolean result1 = javaDeque.removeAll(removeCollection);
+        boolean result2 = myDeque.removeAll(removeCollection);
+
+        Assert.assertEquals(result1, result2);
+
+        Integer[] javaDequeArray = javaDeque.toArray(new Integer[0]);
+        Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
+
+        Assert.assertArrayEquals(javaDequeArray, myDequeArray);
     }
 }
