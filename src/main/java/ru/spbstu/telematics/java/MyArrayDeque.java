@@ -181,32 +181,33 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public boolean add(T t) {
-        return false;
+        this.addLast(t);
+        return true;
     }
 
     @Override
     public boolean offer(T t) {
-        return false;
+        return this.offerLast(t);
     }
 
     @Override
     public T remove() {
-        return null;
+        return this.removeFirst();
     }
 
     @Override
     public T poll() {
-        return null;
+        return this.pollFirst();
     }
 
     @Override
     public T element() {
-        return null;
+        return this.getFirst();
     }
 
     @Override
     public T peek() {
-        return null;
+        return this.peekFirst();
     }
 
     @Override
@@ -231,17 +232,17 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public void push(T t) {
-
+        this.addLast(t);
     }
 
     @Override
     public T pop() {
-        return null;
+        return removeFirst();
     }
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        return this.removeFirstOccurrence(o);
     }
 
     @Override
