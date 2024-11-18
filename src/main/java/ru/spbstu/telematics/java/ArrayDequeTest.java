@@ -612,4 +612,23 @@ public class ArrayDequeTest {
         // Дополнительно проверяем, что оба итератора закончились
         Assert.assertEquals(javaIterator.hasNext(), myIterator.hasNext());
     }
+
+    @Test
+    public void testDescendingIterator() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        for (int i = 0; i < 5; i++) {
+            javaDeque.add(i);
+            myDeque.add(i);
+        }
+
+        Iterator<Integer> javaDescendingIterator = javaDeque.descendingIterator();
+        Iterator<Integer> myDescendingIterator = myDeque.descendingIterator();
+
+        while (javaDescendingIterator.hasNext() && myDescendingIterator.hasNext()) {
+            Assert.assertEquals(javaDescendingIterator.next(), myDescendingIterator.next());
+        }
+
+        Assert.assertEquals(javaDescendingIterator.hasNext(), myDescendingIterator.hasNext());
+    }
 }

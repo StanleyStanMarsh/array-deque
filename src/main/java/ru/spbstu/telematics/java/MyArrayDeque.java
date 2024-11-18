@@ -329,11 +329,11 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
                 throw new IllegalStateException("remove() can only be called once per call to next().");
             }
 
-            // Сдвиг элементов влево, чтобы удаляемый элемент больше не присутствовал в массиве
-            System.arraycopy(array, lastReturnedIndex + 1, array, lastReturnedIndex, size - lastReturnedIndex - 1);
-            array[--size] = null;  // Очистка последнего элемента
-            currentIndex = lastReturnedIndex;  // Обновляем текущий индекс для следующего вызова next()
-            lastReturnedIndex = -1;  // Обновляем lastReturnedIndex чтобы избежать повторного удаления
+            System.arraycopy(array, lastReturnedIndex + 1, array,
+                    lastReturnedIndex, size - lastReturnedIndex - 1);
+            array[--size] = null;
+            currentIndex = lastReturnedIndex;
+            lastReturnedIndex = -1;
         }
     }
 
@@ -359,6 +359,38 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
 
     @Override
     public Iterator<T> descendingIterator() {
-        return null;
+        return new DescendingIterator();
+    }
+
+    private class DescendingIterator implements Iterator<T> {
+        private int currentIndex = size - 1;
+        private int lastReturnedIndex = -1;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex >= 0;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            lastReturnedIndex = currentIndex;
+            return (T) array[currentIndex--];
+        }
+
+        @Override
+        public void remove() {
+            if (lastReturnedIndex < 0) {
+                throw new IllegalStateException("remove() can only be called once per call to next().");
+            }
+
+            System.arraycopy(array, lastReturnedIndex + 1, array,
+                    lastReturnedIndex, size - lastReturnedIndex - 1);
+            array[--size] = null;
+            currentIndex = lastReturnedIndex - 1;
+            lastReturnedIndex = -1;
+        }
     }
 }
