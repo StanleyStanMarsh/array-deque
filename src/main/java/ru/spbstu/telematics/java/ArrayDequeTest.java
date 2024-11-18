@@ -519,7 +519,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void testRemoveAll() {
+    public void removeAllTest() {
         Deque<Integer> javaDeque = new ArrayDeque<>();
         Deque<Integer> myDeque = new MyArrayDeque<>();
 
@@ -539,5 +539,57 @@ public class ArrayDequeTest {
         Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
 
         Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void retainAllTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+
+        Collection<Integer> initialCollection = Arrays.asList(1, 2, 3, 4, 5);
+        myDeque.addAll(initialCollection);
+        javaDeque.addAll(initialCollection);
+
+        Collection<Integer> removeCollection = Arrays.asList(2, 4);
+
+        // Пытаемся удалить элементы
+        boolean result1 = javaDeque.retainAll(removeCollection);
+        boolean result2 = myDeque.retainAll(removeCollection);
+
+        Assert.assertEquals(result1, result2);
+
+        Integer[] javaDequeArray = javaDeque.toArray(new Integer[0]);
+        Integer[] myDequeArray = myDeque.toArray(new Integer[0]);
+
+        Assert.assertArrayEquals(javaDequeArray, myDequeArray);
+    }
+
+    @Test
+    public void containsTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        Collection<Integer> initialCollection = Arrays.asList(1, 2, 3, 4, 5);
+        javaDeque.addAll(initialCollection);
+        myDeque.addAll(initialCollection);
+        for (int i = 1; i <= 5; i++) {
+            Assert.assertEquals(javaDeque.contains(i), myDeque.contains(i));
+        }
+        Assert.assertEquals(javaDeque.contains(6), myDeque.contains(6));
+        Assert.assertEquals(javaDeque.contains(null), myDeque.contains(null));
+    }
+
+    @Test
+    public void containsAllTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        Collection<Integer> collection1 = Arrays.asList(2, 3, 4);
+        Collection<Integer> collection2 = Arrays.asList(1, 5);
+        Collection<Integer> collection3 = Arrays.asList(6, 7);
+        Collection<Integer> collection4 = Arrays.asList(1, 2, 6);
+
+        Assert.assertEquals(javaDeque.containsAll(collection1), myDeque.containsAll(collection1));
+        Assert.assertEquals(javaDeque.containsAll(collection2), myDeque.containsAll(collection2));
+        Assert.assertEquals(javaDeque.containsAll(collection3), myDeque.containsAll(collection3));
+        Assert.assertEquals(javaDeque.containsAll(collection4), myDeque.containsAll(collection4));
     }
 }

@@ -222,12 +222,10 @@ class MyArrayDeque<T> implements Deque<T>
     @Override
     public boolean removeAll(Collection<?> c) {
         int s = this.size;
-        for (int i = 0; i < c.size(); i++) {
-            for (int j = 0; j < this.size; j++) {
-                if (c.contains(this.array[j])) {
-                    this.del(j);
-                    this.size--;
-                }
+        for (int j = 0; j < this.size; j++) {
+            if (c.contains(this.array[j])) {
+                this.del(j);
+                this.size--;
             }
         }
         return s != this.size;
@@ -235,7 +233,14 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        int s = this.size;
+        for (int j = 0; j < this.size; j++) {
+            if (!c.contains(this.array[j])) {
+                this.del(j);
+                this.size--;
+            }
+        }
+        return s != this.size;
     }
 
     @Override
@@ -261,11 +266,27 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        if (c == null) {
+            return false;
+        }
+
+        for (Object element : c) {
+            if (!contains(element)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean contains(Object o) {
+        if (o == null)
+            return false;
+        for (int i = 0; i < this.size; i++) {
+            if (o.equals(this.array[i])) {
+                return true;
+            }
+        }
         return false;
     }
 
