@@ -1,7 +1,7 @@
 package ru.spbstu.telematics.java;
 import java.util.*;
 
-class MyArrayDeque<T> implements Deque<T>, Iterable<T>
+class MyArrayDeque<E> implements Deque<E>, Iterable<E>
 {
     private Object[] array;
     private int size;
@@ -29,19 +29,19 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
         this.size = numElements;
     }
 
-    public MyArrayDeque(Collection<? extends T> c)
+    public MyArrayDeque(Collection<? extends E> c)
     {
         this.array = new Object[c.size()];
         this.size = 0;
-        for (Iterator<? extends T> iter = c.iterator(); iter.hasNext(); )
+        for (Iterator<? extends E> iter = c.iterator(); iter.hasNext(); )
         {
-            T element = iter.next();
+            E element = iter.next();
             this.array[this.size++] = element;
         }
     }
 
     @Override
-    public void addFirst(T t) {
+    public void addFirst(E t) {
         if (t == null)
             throw new NullPointerException();
         Object[] ex = new Object[this.size];
@@ -53,7 +53,7 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
     }
 
     @Override
-    public void addLast(T t) {
+    public void addLast(E t) {
         if (t == null)
             throw new NullPointerException();
         Object[] ex = new Object[this.size];
@@ -65,77 +65,77 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
     }
 
     @Override
-    public boolean offerFirst(T t) {
+    public boolean offerFirst(E t) {
         this.addFirst(t);
         return true;
     }
 
     @Override
-    public boolean offerLast(T t) {
+    public boolean offerLast(E t) {
         this.addLast(t);
         return true;
     }
 
     @Override
-    public T removeFirst() {
+    public E removeFirst() {
         if (this.isEmpty())
             throw new NoSuchElementException();
         return this.pollFirst();
     }
 
     @Override
-    public T removeLast() {
+    public E removeLast() {
         if (this.isEmpty())
             throw new NoSuchElementException();
         return this.pollLast();
     }
 
     @Override
-    public T pollFirst() {
+    public E pollFirst() {
         if (this.isEmpty())
             return null;
-        T firstElement = this.getFirst();
+        E firstElement = this.getFirst();
         this.del(0);
         this.size--;
         return firstElement;
     }
 
     @Override
-    public T pollLast() {
+    public E pollLast() {
         if (this.isEmpty())
             return null;
-        T lastElement = this.getLast();
+        E lastElement = this.getLast();
         this.del(this.size - 1);
         this.size--;
         return lastElement;
     }
 
     @Override
-    public T getFirst() {
+    public E getFirst() {
         if (this.isEmpty())
             throw new NoSuchElementException();
         return this.peekFirst();
     }
 
     @Override
-    public T getLast() {
+    public E getLast() {
         if (this.isEmpty())
             throw new NoSuchElementException();
         return this.peekLast();
     }
 
     @Override
-    public T peekFirst() {
+    public E peekFirst() {
         if (this.isEmpty())
             return null;
-        return (T) this.array[0];
+        return (E) this.array[0];
     }
 
     @Override
-    public T peekLast() {
+    public E peekLast() {
         if (this.isEmpty())
             return null;
-        return (T) this.array[this.size - 1];
+        return (E) this.array[this.size - 1];
     }
 
     private void del(int index) {
@@ -180,40 +180,40 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
     }
 
     @Override
-    public boolean add(T t) {
+    public boolean add(E t) {
         this.addLast(t);
         return true;
     }
 
     @Override
-    public boolean offer(T t) {
+    public boolean offer(E t) {
         return this.offerLast(t);
     }
 
     @Override
-    public T remove() {
+    public E remove() {
         return this.removeFirst();
     }
 
     @Override
-    public T poll() {
+    public E poll() {
         return this.pollFirst();
     }
 
     @Override
-    public T element() {
+    public E element() {
         return this.getFirst();
     }
 
     @Override
-    public T peek() {
+    public E peek() {
         return this.peekFirst();
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> c) {
+    public boolean addAll(Collection<? extends E> c) {
         int s = this.size;
-        for (T element : c) {
+        for (E element : c) {
             this.addLast(element);
         }
         return s != this.size;
@@ -250,12 +250,12 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
     }
 
     @Override
-    public void push(T t) {
+    public void push(E t) {
         this.addFirst(t);
     }
 
     @Override
-    public T pop() {
+    public E pop() {
         return removeFirst();
     }
 
@@ -301,11 +301,11 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<E> iterator() {
         return new MyArrayDequeIterator();
     }
 
-    private class MyArrayDequeIterator implements Iterator<T> {
+    private class MyArrayDequeIterator implements Iterator<E> {
         private int currentIndex = 0;
         private int lastReturnedIndex = -1;
 
@@ -315,12 +315,12 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
         }
 
         @Override
-        public T next() {
+        public E next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
             lastReturnedIndex = currentIndex;
-            return (T) array[currentIndex++];
+            return (E) array[currentIndex++];
         }
 
         @Override
@@ -343,9 +343,9 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
     }
 
     @Override
-    public <T1> T1[] toArray(T1[] a) {
+    public <T> T[] toArray(T[] a) {
         if (a.length < this.size) {
-            return (T1[]) Arrays.copyOf(this.array, this.size, a.getClass());
+            return (T[]) Arrays.copyOf(this.array, this.size, a.getClass());
         }
 
         System.arraycopy(this.array, 0, a, 0, this.size);
@@ -358,11 +358,11 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
     }
 
     @Override
-    public Iterator<T> descendingIterator() {
+    public Iterator<E> descendingIterator() {
         return new DescendingIterator();
     }
 
-    private class DescendingIterator implements Iterator<T> {
+    private class DescendingIterator implements Iterator<E> {
         private int currentIndex = size - 1;
         private int lastReturnedIndex = -1;
 
@@ -372,12 +372,12 @@ class MyArrayDeque<T> implements Deque<T>, Iterable<T>
         }
 
         @Override
-        public T next() {
+        public E next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
             lastReturnedIndex = currentIndex;
-            return (T) array[currentIndex--];
+            return (E) array[currentIndex--];
         }
 
         @Override
