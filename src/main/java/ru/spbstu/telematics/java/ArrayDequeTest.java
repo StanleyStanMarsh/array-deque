@@ -592,4 +592,24 @@ public class ArrayDequeTest {
         Assert.assertEquals(javaDeque.containsAll(collection3), myDeque.containsAll(collection3));
         Assert.assertEquals(javaDeque.containsAll(collection4), myDeque.containsAll(collection4));
     }
+
+    @Test
+    public void iteratorTest() {
+        Deque<Integer> javaDeque = new ArrayDeque<>();
+        Deque<Integer> myDeque = new MyArrayDeque<>();
+        for (int i = 0; i < 5; i++) {
+            javaDeque.add(i);
+            myDeque.add(i);
+        }
+
+        Iterator<Integer> javaIterator = javaDeque.iterator();
+        Iterator<Integer> myIterator = myDeque.iterator();
+
+        while (javaIterator.hasNext() && myIterator.hasNext()) {
+            Assert.assertEquals(javaIterator.next(), myIterator.next());
+        }
+
+        // Дополнительно проверяем, что оба итератора закончились
+        Assert.assertEquals(javaIterator.hasNext(), myIterator.hasNext());
+    }
 }

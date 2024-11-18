@@ -1,7 +1,7 @@
 package ru.spbstu.telematics.java;
 import java.util.*;
 
-class MyArrayDeque<T> implements Deque<T>
+class MyArrayDeque<T> implements Deque<T>, Iterable<T>
 {
     private Object[] array;
     private int size;
@@ -302,7 +302,39 @@ class MyArrayDeque<T> implements Deque<T>
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new MyArrayDequeIterator();
+    }
+
+    private class MyArrayDequeIterator implements Iterator<T> {
+        private int currentIndex = 0;
+        private int lastReturnedIndex = -1;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < size;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            lastReturnedIndex = currentIndex;
+            return (T) array[currentIndex++];
+        }
+
+        @Override
+        public void remove() {
+            if (lastReturnedIndex < 0) {
+                throw new IllegalStateException("remove() can only be called once per call to next().");
+            }
+
+            // Сдвиг элементов влево, чтобы удаляемый элемент больше не присутствовал в массиве
+            System.arraycopy(array, lastReturnedIndex + 1, array, lastReturnedIndex, size - lastReturnedIndex - 1);
+            array[--size] = null;  // Очистка последнего элемента
+            currentIndex = lastReturnedIndex;  // Обновляем текущий индекс для следующего вызова next()
+            lastReturnedIndex = -1;  // Обновляем lastReturnedIndex чтобы избежать повторного удаления
+        }
     }
 
     @Override
